@@ -30,6 +30,7 @@ class lvm {
     define local($size) {
       lvm::logical_volume { $name: size => $size }
       lvm::volume::mount_by_label { $name:
+        label => $name,
         require => Lvm::Logical_Volume[$name]
       }
     }
