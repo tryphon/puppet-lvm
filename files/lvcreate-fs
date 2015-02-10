@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+name=$1
+size=$2
+#short_name=`echo $name | sed 's/.*-\(.*\)$/\1/'`
+short_name=$name
+
+lvcreate -L $size -n $name vg
+mke2fs -t ext4 -L $short_name /dev/vg/$name
