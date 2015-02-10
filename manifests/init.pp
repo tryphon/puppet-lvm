@@ -27,9 +27,9 @@ class lvm {
       }
     }
 
-    define local($size) {
+    define local($mount_point = "/srv/$name", $size) {
       lvm::logical_volume { $name: size => $size }
-      lvm::volume::mount_by_label { $name:
+      lvm::volume::mount_by_label { $mount_point:
         label => $name,
         require => Lvm::Logical_Volume[$name]
       }
