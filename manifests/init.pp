@@ -30,7 +30,8 @@ class lvm {
     define local($mount_point = "/srv/$name", $size) {
       lvm::logical_volume { $name: size => $size }
       lvm::volume::mount_by_label { $mount_point:
-        label => $name,
+        # ext labels are limited to 16 characters
+        label => regsubst($name,'^(.{16}).*','\1'),
         require => Lvm::Logical_Volume[$name]
       }
     }
