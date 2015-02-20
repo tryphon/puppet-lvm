@@ -16,8 +16,10 @@ class lvm {
 
   class volume {
     define mount_by_label($label) {
-      if ! defined(File[$name]) {
-        file { $name: ensure => directory }
+      exec {"create-mount-point-by-label-$name":
+        command => "mkdir -p ${name}",
+        creates => $name,
+        before => Mount[$name]
       }
       mount { $name:
         ensure => mounted,
