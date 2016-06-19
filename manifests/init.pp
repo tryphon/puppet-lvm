@@ -2,7 +2,7 @@ class lvm {
   package { 'lvm2': }
 
   file { '/usr/local/sbin/lvcreate-fs':
-    source => 'puppet:///lvm/lvcreate-fs',
+    source => 'puppet:///modules/lvm/lvcreate-fs',
     mode => 755
   }
 
@@ -46,7 +46,7 @@ class lvm::munin::plugins {
     include munin
 
     munin::plugin { "lvm_usage_$name":
-      source => "puppet:///lvm/munin/lvm_usage_",
+      source => "puppet:///modules/lvm/munin/lvm_usage_",
       config => "user root"
     }
   }
